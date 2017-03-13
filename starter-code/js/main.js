@@ -1,16 +1,55 @@
-//console.log("JS file is connected to HTML! Woo!")
-
-var cards = ['queen', 'queen', 'king', 'king'];
+var cards = [
+  {
+    rank: 'queen',
+    suit: 'hearts',
+    cardImage: 'images/queenhearts.png'
+  },
+  {
+    rank: 'queen',
+    suit: 'spades',
+    cardImage: 'images/queenspades.png'
+  },
+  {
+    rank: 'king',
+    suit: 'hearts',
+    cardImage: 'images/kinghearts.png'
+  },
+  {
+    rank: 'king',
+    suit: 'spades',
+    cardImage: 'images/kingspades.png'
+  }
+];
 var cardsInPlay = [];
-var board = document.getElementById("game-Board");
 
-function createBoard() {
-	for (var i=0; i<cards.legnth; i++){
-		var cardElement = document.createElement('div');
-		cardElement.className = 'card';
-		board.appendChild(cardElement);
-	}
+var checkMatch = function () {
+  if (cardsInPlay[0] === cardsInPlay[1]) {
+    alert("You found a match!");
+  } else {
+    alert("Sorry, try again.");
+  }
+};
+
+var createBoard = function () {
+  for (var i = 0; i < cards.length; i++) {
+    var cardElement = document.createElement('img');
+    cardElement.setAttribute('src', 'images/back.png');
+    cardElement.setAttribute('data-id', i);
+    cardElement.addEventListener('click', isTwocards);
+    document.getElementById('game-board').appendChild(cardElement);
+  }
+
+};
+
+var isTwocards = function () {
+  cardId = this.getAttribute('data-id');
+  console.log(cardId);
+  cardsInPlay.push(cards[cardId].rank);
+  this.setAttribute('src', cards[cardId].cardImage);
+  if (cardsInPlay.length === 2) {
+    checkMatch();
+    cardsInPlay = [];
+  }
 }
 
 createBoard();
- 
