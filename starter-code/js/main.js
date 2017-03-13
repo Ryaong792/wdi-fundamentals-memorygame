@@ -22,7 +22,7 @@ var cards = [
 ];
 var cardsInPlay = [];
 
-var checkMatch = function () {
+var isMatch = function () {
   if (cardsInPlay[0] === cardsInPlay[1]) {
     alert("You found a match!");
   } else {
@@ -47,7 +47,7 @@ var isTwocards = function () {
   cardsInPlay.push(cards[cardId].rank);
   this.setAttribute('src', cards[cardId].cardImage);
   if (cardsInPlay.length === 2) {
-    checkMatch();
+    isMatch();
     cardsInPlay = [];
   }
 }
